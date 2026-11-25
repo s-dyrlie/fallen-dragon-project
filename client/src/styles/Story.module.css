@@ -69,7 +69,7 @@
 }
 
 .noteboardContainer {
-  background-image: url("/images/game-images/ui/beige_border2.png");
+  background-image: url("/images/game-images/UI/beige_border2.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -118,7 +118,7 @@
 }
 
 .choiceButton {
-  background-image: url("/images/game-images/ui/button.png");
+  background-image: url("/images/game-images/UI/button.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 10px 20px;
@@ -236,7 +236,7 @@
   padding: 6px 16px;
   text-transform: capitalize;
   letter-spacing: 1px;
-  background-image: url("/images/game-images/ui/tape.png");
+  background-image: url("/images/game-images/UI/tape.png");
   background-size: 100% 100%;
   min-width: 120px;
   display: inline-block;
@@ -296,15 +296,15 @@
   transform: translateX(15px) translateY(0px);
 }
 
-.poseMageFloating {
+.poseMage1Floating {
   transform: translateX(7px) translateY(16px);
 }
 
-.poseMageCrouching {
+.poseMage1Crouching {
   transform: translateX(-6px) translateY(-5px);
 }
 
-.poseMageDizzy {
+.poseMage1Dizzy {
   transform: translateX(8px) translateY(-2px);
 }
 

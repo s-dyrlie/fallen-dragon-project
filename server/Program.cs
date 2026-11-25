@@ -1,6 +1,7 @@
 using DragonGame.Data;
 using DragonGame.Repositories;
 using DragonGame.Services;
+using DragonGame.Middleware;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -14,8 +15,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Service Configuration
 // ========================================
 
-builder.Services.AddControllersWithViews();
-
 // Configure JSON serialization to match frontend TypeScript conventions
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -28,7 +27,7 @@ builder.Services.AddControllers()
 
 // Database configuration
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=App_Data/DragonGame.db"));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // JWT authentication setup
 builder.Services.AddScoped<IJwtService, JwtService>();
@@ -60,8 +59,6 @@ builder.Services.AddAuthentication(options =>
 // Dependency Injection
 // ========================================
 
-builder.Services.AddScoped<AppDbContext>();
-
 // Repositories
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ICharacterRepository, CharacterRepository>();
@@ -75,7 +72,6 @@ builder.Services.AddScoped<IPlayerSessionService, PlayerSessionService>();
 builder.Services.AddScoped<ICharacterService, CharacterService>();
 builder.Services.AddScoped<IPoseService, PoseService>();
 builder.Services.AddScoped<IChoiceHistoryService, ChoiceHistoryService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
 
 // ========================================
 // CORS Configuration
@@ -83,13 +79,6 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
-    {
-        policy.AllowAnyOrigin()
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
-
     // Specific policy for React development server
     options.AddPolicy("AllowReactDev",
         policy =>
@@ -121,22 +110,20 @@ using (var scope = app.Services.CreateScope())
 // Middleware Pipeline
 // ========================================
 
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
 app.UseCors("AllowReactDev");
-app.UseCors();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication(); 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Character}/{action=Create}/{id?}");
+app.MapControllers();
 
 app.Run();

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using DragonGame.Data;
 using DragonGame.Dtos;
 using DragonGame.Models;
@@ -27,12 +28,17 @@ public class PlayerSessionController : ControllerBase
         _logger = logger;
     }
 
+    private int GetCurrentUserId()
+    {
+        return int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+    }
+
     [HttpGet("{sessionId}")]
     public async Task<ActionResult<PlayerSessionDto>> GetSession(int sessionId)
     {
         var dto = await _service.GetSessionDtoAsync(sessionId);
 
-        if (dto == null)
+        if (dto == null || dto.UserId != GetCurrentUserId())
         {
             _logger.LogWarning("Session not found: {SessionId}", sessionId);
             return NotFound(new { message = "Session not found" });
@@ -44,9 +50,10 @@ public class PlayerSessionController : ControllerBase
     [HttpGet("{sessionId}/character")]
     public async Task<ActionResult<Character>> GetCharacterForSession(int sessionId)
     {
+        var userId = GetCurrentUserId();
         var session = await _context.PlayerSessions
             .Include(s => s.Character)
-            .FirstOrDefaultAsync(s => s.SessionId == sessionId);
+            .FirstOrDefaultAsync(s => s.SessionId == sessionId && s.UserId == userId);
 
         if (session?.Character == null)
         {

@@ -202,7 +202,7 @@ const StoryPage: React.FC<StoryPageProps> = ({ sessionId }) => {
 
             <div className={styles.dragonSection}>
               <img
-                src="/images/game-images/ui/Death3.png"
+                src="/images/game-images/UI/Death3.png"
                 alt="Dragon"
                 className={styles.dragonImage}
               />
@@ -249,7 +249,15 @@ const StoryPage: React.FC<StoryPageProps> = ({ sessionId }) => {
                       src={`/images/avatar/poses/${selectedPose.imageUrl}`}
                       alt="pose"
                       className={`${styles.characterLayer} ${
-                        styles[`pose${selectedPose.name.replace(/\s+/g, "")}`]
+                        styles[
+                          `pose${
+                            character.body
+                              .split("-")[0]
+                              .charAt(0)
+                              .toUpperCase() +
+                            character.body.split("-")[0].slice(1)
+                          }${selectedPose.name.replace(/\s+/g, "")}`
+                        ]
                       }`}
                     />
                   )}

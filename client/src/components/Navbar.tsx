@@ -31,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({
     <nav className={styles.navbar}>
       <div className={styles.navLeft}>
         <img
-          src="/images/game-images/ui/con42.png"
+          src="/images/game-images/UI/con42.png"
           alt="Dragon"
           className={styles.dragonIcon}
           onClick={handleHomeClick}

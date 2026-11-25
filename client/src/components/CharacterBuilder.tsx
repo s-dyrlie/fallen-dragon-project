@@ -158,12 +158,8 @@ export default function CharacterBuilder({
                     `pose${
                       characterType.charAt(0).toUpperCase() +
                       characterType.slice(1)
-                    }`
+                    }${selectedPose.name.replace(/\s+/g, "")}`
                   ]
-                } ${
-                  selectedPose.name
-                    ? styles[`pose${selectedPose.name.replace(/\s+/g, "")}`]
-                    : ""
                 }`}
               />
             )}

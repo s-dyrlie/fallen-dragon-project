@@ -14,7 +14,7 @@ export interface AuthResponse {
   token: string;
 }
 
-const API_BASE = "http://localhost:5151/api";
+const API_BASE = `${import.meta.env.VITE_API_URL ?? ""}/api`;
 
 export const register = async (data: RegisterData): Promise<AuthResponse> => {
   const response = await fetch(`${API_BASE}/auth/register`, { 

@@ -58,9 +58,10 @@ public class StoryController : ControllerBase
     [HttpGet("session/{sessionId}")]
     public async Task<IActionResult> GetSession(int sessionId)
     {
+        var userId = GetCurrentUserId();
         var session = await _context.PlayerSessions
             .Include(s => s.Character)
-            .FirstOrDefaultAsync(s => s.SessionId == sessionId);
+            .FirstOrDefaultAsync(s => s.SessionId == sessionId && s.UserId == userId);
 
         if (session == null)
         {
@@ -87,6 +88,9 @@ public class StoryController : ControllerBase
     [HttpGet("{sessionId}/character")]
     public async Task<ActionResult<Character>> GetCharacterForSession(int sessionId)
     {
+        if (await _sessionService.GetOwnedSessionAsync(sessionId, GetCurrentUserId()) == null)
+            return NotFound(new { message = "Session not found" });
+
         var character = await _sessionService.GetCharacterForSessionAsync(sessionId);
         
         if (character == null)
@@ -101,6 +105,9 @@ public class StoryController : ControllerBase
     [HttpPut("updateCharacter/{sessionId}")]
     public async Task<IActionResult> UpdateCharacter(int sessionId, [FromBody] UpdateCharacterDto dto)
     {
+        if (await _sessionService.GetOwnedSessionAsync(sessionId, GetCurrentUserId()) == null)
+            return NotFound(new { message = "Session not found" });
+
         var character = new Character
         {
             Id = dto.Id,
@@ -124,11 +131,12 @@ public class StoryController : ControllerBase
     [HttpGet("currentAct/{sessionId}")]
     public async Task<ActionResult<ActDto>> GetCurrentAct(int sessionId)
     {
+        var userId = GetCurrentUserId();
         var session = await _context.PlayerSessions
             .Include(s => s.Story!)
                 .ThenInclude(st => st.Acts!)
                     .ThenInclude(a => a.Choices)
-            .FirstOrDefaultAsync(s => s.SessionId == sessionId);
+            .FirstOrDefaultAsync(s => s.SessionId == sessionId && s.UserId == userId);
 
         if (session == null)
         {
@@ -185,6 +193,9 @@ public class StoryController : ControllerBase
     [HttpPost("nextAct/{sessionId}")]
     public async Task<IActionResult> NextAct(int sessionId, [FromBody] NextActRequestDto request)
     {
+        if (await _sessionService.GetOwnedSessionAsync(sessionId, GetCurrentUserId()) == null)
+            return NotFound(new { message = "Session not found" });
+
         _logger.LogInformation(
             "Session {SessionId} advancing to act {NextActNumber}", 
             sessionId, 
