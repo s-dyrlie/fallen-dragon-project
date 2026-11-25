@@ -1,7 +1,7 @@
 import { Character, CharacterPose } from "../types/character";
 import { getToken } from "./authApi";
 
-const API_BASE = "http://localhost:5151"; 
+const API_BASE = import.meta.env.VITE_API_URL ?? "";
 
 export interface ChoiceDto {
   text: string;          

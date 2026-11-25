@@ -78,13 +78,13 @@
 .arrowHeadLeft {
   left: -40px;
   top: 40%; /* Align with head area */
-  background-image: url("/images/game-images/ui/backward_button.png");
+  background-image: url("/images/game-images/UI/backward_button.png");
 }
 
 .arrowHeadRight {
   right: -40px;
   top: 40%; /* Align with head area */
-  background-image: url("/images/game-images/ui/forward_button.png");
+  background-image: url("/images/game-images/UI/forward_button.png");
 }
 
 /* ========================================
@@ -94,13 +94,13 @@
 .arrowBodyLeft {
   left: -40px;
   top: 70%; /* Align with body/center */
-  background-image: url("/images/game-images/ui/backward_button.png");
+  background-image: url("/images/game-images/UI/backward_button.png");
 }
 
 .arrowBodyRight {
   right: -40px;
   top: 70%; /* Align with body/center */
-  background-image: url("/images/game-images/ui/forward_button.png");
+  background-image: url("/images/game-images/UI/forward_button.png");
 }
 
 /* ========================================
@@ -113,7 +113,7 @@
   position: relative;
   border: none;
   border-radius: var(--radius-lg);
-  background: url("/images/game-images/ui/background2/Bright/clouds_back_layer2.png");
+  background: url("/images/game-images/UI/background2/Bright/clouds_back_layer2.png");
   background-size: cover;
   background-position: center;
   box-shadow: var(--shadow-md), inset 0 0 20px rgba(76, 175, 80, 0.1);
@@ -223,7 +223,7 @@
   font-family: inherit;
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
-  background: url("/images/game-images/ui/button_type3_1part_yellow.png");
+  background: url("/images/game-images/UI/button_type3_1part_yellow.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   border: none;
@@ -278,7 +278,7 @@
   font-family: inherit;
   font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
-  background: url("/images/game-images/ui/button_type2.png");
+  background: url("/images/game-images/UI/button_type2.png");
   background-size: 100% 100%;
   border: none;
   cursor: pointer;
@@ -288,7 +288,7 @@
 }
 
 .dropdownOption:hover {
-  background: url("/images/game-images/ui/button_yellow.png");
+  background: url("/images/game-images/UI/button_yellow.png");
   background-size: 100% 100%;
 }
 
@@ -356,15 +356,15 @@
   transform: translateX(15px) translateY(0px);
 }
 
-.poseMageFloating {
+.poseMage1Floating {
   transform: translateX(5px) translateY(12px);
 }
 
-.poseMageCrouching {
+.poseMage1Crouching {
   transform: translateX(-6px) translateY(-5px);
 }
 
-.poseMageDizzy {
+.poseMage1Dizzy {
   transform: translateX(8px) translateY(-2px);
 }
 
@@ -374,7 +374,7 @@
 }
 
 .poseMage2Jumping {
-  transform: translateX(-50%) translateX(-12px) translateY(-1px);
+  transform: translateX(-12px) translateY(-1px);
 }
 
 .poseMage2Standing {

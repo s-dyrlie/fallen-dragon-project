@@ -59,6 +59,13 @@ public class PlayerSessionService : IPlayerSessionService
         return await _sessionRepo.GetWithCharacterAsync(sessionId);
     }
 
+    // Returns the session only if it belongs to the given user, otherwise null
+    public async Task<PlayerSession?> GetOwnedSessionAsync(int sessionId, int userId)
+    {
+        var session = await _sessionRepo.GetWithCharacterAsync(sessionId);
+        return session?.UserId == userId ? session : null;
+    }
+
     public async Task<PlayerSessionDto?> GetSessionDtoAsync(int sessionId)
     {
         var session = await _sessionRepo.GetWithCharacterAsync(sessionId);

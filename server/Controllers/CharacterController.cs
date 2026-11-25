@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -25,13 +26,6 @@ public class CharacterController : ControllerBase
         _characterService = characterService;
         _context = context;
         _logger = logger;
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
-    {
-        var characters = await _characterService.GetAllAsync();
-        return Ok(characters);
     }
 
     [HttpGet("{id}")]
@@ -79,9 +73,10 @@ public class CharacterController : ControllerBase
     [HttpPut("session/{sessionId}")]
     public async Task<IActionResult> UpdateCharacterForSession(int sessionId, [FromBody] UpdateCharacterDto dto)
     {
+        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
         var session = await _context.PlayerSessions
             .Include(s => s.Character)
-            .FirstOrDefaultAsync(s => s.SessionId == sessionId);
+            .FirstOrDefaultAsync(s => s.SessionId == sessionId && s.UserId == userId);
 
         if (session?.Character == null)
         {

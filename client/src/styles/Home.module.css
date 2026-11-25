@@ -96,7 +96,7 @@
   right: -15px;
   bottom: -15px;
   border: 30px solid transparent;
-  border-image: url("/images/game-images/ui/border.png") 30 stretch;
+  border-image: url("/images/game-images/UI/border.png") 30 stretch;
   pointer-events: none;
   z-index: -1;
 }
@@ -121,7 +121,7 @@
   padding: var(--spacing-sm) var(--spacing-md);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
-  background: url("/images/game-images/ui/button.png");
+  background: url("/images/game-images/UI/button.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   color: var(--color-game-primary-dark);
@@ -264,7 +264,7 @@
   letter-spacing: 1px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 
-  background: url("/images/game-images/ui/tape.png");
+  background: url("/images/game-images/UI/tape.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   border: none !important;
@@ -326,7 +326,7 @@
   gap: var(--spacing-xs);
   max-height: fit-content;
   padding: var(--spacing-sm) var(--spacing-md);
-  background: url("/images/game-images/ui/button_yellow.png");
+  background: url("/images/game-images/UI/button_yellow.png");
   border: none;
   cursor: pointer;
   font-size: var(--font-size-base);

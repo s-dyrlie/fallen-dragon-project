@@ -422,3 +422,4 @@ FodyWeavers.xsd
 *.db-shm
 *.db-wal
 server/App_Data/*.dbserver/App_Data/DragonGame.db
+.DS_Store

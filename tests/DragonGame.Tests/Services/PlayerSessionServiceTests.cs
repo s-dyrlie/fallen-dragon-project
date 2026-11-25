@@ -204,6 +204,33 @@ namespace DragonGame.Tests.Services
         }
 
         [Fact]
+        public async Task GetOwnedSessionAsync_SessionBelongsToUser_ReturnsSession()
+        {
+            // Given
+            var session = CreateMockSession(defaultChoices, 1, 1, 1, null, 1);
+            _sessionRepoMock.Setup(repo => repo.GetWithCharacterAsync(1)).ReturnsAsync(session);
+
+            // When
+            var result = await _sut.GetOwnedSessionAsync(1, 1);
+
+            // Then
+            result.Should().BeSameAs(session);
+        }
+        [Fact]
+        public async Task GetOwnedSessionAsync_SessionBelongsToOtherUser_ReturnsNull()
+        {
+            // Given (session belongs to user 1, user 2 asks for it)
+            var session = CreateMockSession(defaultChoices, 1, 1, 1, null, 1);
+            _sessionRepoMock.Setup(repo => repo.GetWithCharacterAsync(1)).ReturnsAsync(session);
+
+            // When
+            var result = await _sut.GetOwnedSessionAsync(1, 2);
+
+            // Then
+            result.Should().BeNull();
+        }
+
+        [Fact]
         public async Task GetSessionDtoAsync_ValidSessionExists_ReturnsMappedDto()
         {
             // Given

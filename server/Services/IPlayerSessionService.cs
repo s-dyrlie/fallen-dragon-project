@@ -7,6 +7,7 @@ public interface IPlayerSessionService
 {
     Task<PlayerSession> CreateSessionAsync(CreateSessionDto dto, int userId);
     Task<PlayerSession?> GetSessionAsync(int sessionId);
+    Task<PlayerSession?> GetOwnedSessionAsync(int sessionId, int userId);
     Task<PlayerSessionDto?> GetSessionDtoAsync(int sessionId);
     Task<Character?> GetCharacterForSessionAsync(int sessionId);
     Task<PlayerSession?> UpdateCharacterAsync(int sessionId, Character character);

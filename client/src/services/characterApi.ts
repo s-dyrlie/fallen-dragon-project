@@ -1,7 +1,7 @@
 import axios from "axios";
 import { CharacterPose } from "../types/character";
 
-const POSE_API = "http://localhost:5151/api/poses";
+const POSE_API = `${import.meta.env.VITE_API_URL ?? ""}/api/poses`;
 
 export async function getAllPoses(): Promise<CharacterPose[]> {
   try {
