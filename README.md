@@ -5,6 +5,10 @@ Group project for subject Webapplications.
 
 A story-based fantasy game with branching narratives, character customization, and player choice tracking.
 
+**Live demo:** https://fallen-dragon.onrender.com
+*(free hosting: the first load can take up to a minute while the server wakes up)*
+
+
 ## About this repository
 
 This started as a group project in Web Applications at OsloMet (autumn 2025),
