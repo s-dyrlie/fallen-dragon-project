@@ -119,11 +119,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseCors("AllowReactDev");
 app.UseHttpsRedirection();
+app.UseDefaultFiles();   // serves index.html when someone opens "/"
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapFallbackToFile("index.html");   // sends React routes like /home and /story/5 to React
 
 app.Run();
